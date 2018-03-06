@@ -108,8 +108,8 @@ import simplehmm
 # Get command line arguments
 
 if (len(sys.argv) != 4):
-  print 'USAGE: python trainhmm.py  [hmm_training_file] [hmm_model_file] ' + \
-        '[hmm_smoothing]'
+  print('USAGE: python trainhmm.py  [hmm_training_file] [hmm_model_file] ' + \
+        '[hmm_smoothing]')
   sys.exit()
 
 hmm_training_file = sys.argv[1]
@@ -117,8 +117,8 @@ hmm_model_file =    sys.argv[2]
 hmm_smoothing =     sys.argv[3].lower()
 
 if (hmm_smoothing not in ['none', 'laplace','absdiscount']):
-  print 'Illegal HMM smoothing method: %s ' % (hmm_smoothing) + \
-        '(has to be one of: "none", "laplace","absdiscount")'
+  print('Illegal HMM smoothing method: %s ' % (hmm_smoothing) + \
+        '(has to be one of: "none", "laplace","absdiscount")')
   sys.exit()
 
 if (hmm_smoothing == 'none'):
@@ -161,12 +161,12 @@ while (line != ''):
       state = state.strip()
 
       if ((len(tag) != 2) or (tag.isupper() != True)):
-        print 'Illegal tag in line %d: %s' % (line_cnt, line)
+        print('Illegal tag in line %d: %s' % (line_cnt, line))
         sys.exit()
       tag_set.add(tag)
 
       if ((state == '') or (state.isupper() == True)):
-        print 'Empty or illegal state in line %d: %s' % (line_cnt, line)
+        print('Empty or illegal state in line %d: %s' % (line_cnt, line))
         sys.exit()
       state_set.add(state)
 
@@ -185,17 +185,17 @@ state_list = list(state_set)
 state_list.sort()
 
 
-print 'Set of tags found in HMM training file:'
-print '  %s' % (', '.join(tag_list))
-print
-print 'Set of HMM states found in HMM training file:'
-print '  %s' % (', '.join(state_list))
-print
+print('Set of tags found in HMM training file:')
+print('  %s' % (', '.join(tag_list))
+print()
+print('Set of HMM states found in HMM training file:')
+print('  %s' % (', '.join(state_list)))
+print()
 
-print 'Parsed %d training records:' % (len(train_rec_list))
+print('Parsed %d training records:' % (len(train_rec_list)))
 for train_rec in train_rec_list:
-  print '  %s' % (train_rec)
-print
+  print('  %s' % (train_rec))
+print()
 
 # Initalise HMM and train it with training data - - - - - - - - - - - - - - - -
 #

@@ -4327,20 +4327,20 @@ sys.exit()  ####### PC 24/07/07
 m_sete, nm_sete = classification.get_examples(wv_dict,
                             match_method=(1.0,'threshold',0.3),
                             non_match_method=(0.0,'threshold',0.3))
-print 'examples threshold:', len(m_sete),len(nm_sete)
+print('examples threshold:', len(m_sete),len(nm_sete))
 measurements.accuracy(m_sete, nm_sete)
 
 m_sete, nm_sete = classification.get_examples(wv_dict,
                             match_method=(1.0,'nearest',100),
                             non_match_method=(0.0,'nearest',100))
-print 'examples nearest 100:', len(m_sete),len(nm_sete)
+print('examples nearest 100:', len(m_sete),len(nm_sete))
 measurements.accuracy(m_sete, nm_sete)
 
 imbalance = float(rest_ds.num_records) / len(wv_dict)
-print 'imblance:', imbalance
+print('imblance:', imbalance)
 
 m_sete, nm_sete = classification.get_examples(wv_dict,
                             match_method=(1.0,'nearest',100),
                            non_match_method=(0.0,'nearest',int(100/imbalance)))
-print 'examples nearest 100 / imbalance:', len(m_sete),len(nm_sete)
+print('examples nearest 100 / imbalance:', len(m_sete),len(nm_sete))
 measurements.accuracy(m_sete, nm_sete)

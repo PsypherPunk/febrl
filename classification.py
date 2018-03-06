@@ -3405,7 +3405,7 @@ class TwoStep(Classifier):
             train_labels.append(-1.0)
             del un_used_w_vec_dict[rec_id_tuple]  # It is used in training now
 
-          print 'Size of new training sets:',len(m_train_set),len(nm_train_set)
+          print('Size of new training sets:',len(m_train_set),len(nm_train_set))
 
           assert len(train_data) == len(m_train_set)+len(nm_train_set), \
                  (len(train_data), len(m_train_set)+len(nm_train_set))
@@ -3423,10 +3423,10 @@ class TwoStep(Classifier):
           else:
             self.svm_model = svm.libsvm.svm_train(svm_prob, svm_param)
 
-        print 'Final training sets size:',len(m_train_set),len(nm_train_set)
-        print (len(m_train_set)+len(nm_train_set)) / float(len(w_vec_dict))
-        print '  increment:', increment, 'train_perc', train_perc
-        print
+        print('Final training sets size:',len(m_train_set),len(nm_train_set))
+        print((len(m_train_set)+len(nm_train_set)) / float(len(w_vec_dict)))
+        print('  increment:', increment, 'train_perc', train_perc)
+        print()
 
       logging.info('Trained SVM with %d training examples' % (len(train_data)))
 
@@ -4935,7 +4935,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
       elif rec_id_tuple in non_match_set:
         nm_count += 1.0
       else:
-        print 'error!', rec_id_tuple
+        print('error!', rec_id_tuple)
 
     num_weight_vec = float(len(weight_vec_dict))
 
@@ -5011,7 +5011,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
       elif rec_id_tuple in non_match_set:
         nm_count += 1
       else:
-        print 'error!', rec_id_tuple
+        print('error!', rec_id_tuple)
 
     if (m_count > nm_count):
       return ('M', m_count)
@@ -5164,7 +5164,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
     elif (decs_class == 'NM'):
       non_match_set.add(rec_id_tuple)
     else:
-      print 'XX:', decs_class
+      print('XX:', decs_class)
 
   logging.info('Classified %d weight vectors as matches, %d as non-matches' % \
                (len(match_set), len(non_match_set)))

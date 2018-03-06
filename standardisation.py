@@ -1863,9 +1863,9 @@ class NameStandardiser(ComponentStandardiser):
     for t in self.count_dict:
 
       logging.info('  %20s: %d' % (std_type_dict[t], self.count_dict[t]))
-      print '  %20s: %d' % (std_type_dict[t], self.count_dict[t])  ###########
+      print('  %20s: %d' % (std_type_dict[t], self.count_dict[t]))  ###########
 
-    if (self.hmm_seq_prob_file != None):
+    if (self.hmm_seq_prob_file is not None):
       self.__write_hmm_seq_prob_file__('Name HMM')
 
 # =============================================================================

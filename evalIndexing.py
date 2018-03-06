@@ -630,21 +630,21 @@ experiment_name_list = [arg_data_set_name]
 for ds_name in experiment_name_list:
 
   data_set_name = experiment_dict[ds_name][0]
-  print '='*70
-  print
-  print 'Data set:', data_set_name, '      ',  time.ctime()
-  print '----------'+'-'*len(data_set_name)
+  print('='*70)
+  print()
+  print('Data set:', data_set_name, '      ',  time.ctime())
+  print('----------'+'-'*len(data_set_name))
 
   data_set1 = experiment_dict[ds_name][1]
   data_set2 = experiment_dict[ds_name][2]
 
   if (data_set1 == data_set2):
     task = 'dedup'
-    print '  Task: Deduplication'
+    print('  Task: Deduplication')
 
   else:
     task = 'link'
-    print '  Task: Linkage'
+    print('  Task: Linkage')
 
   rec_cmp =   experiment_dict[ds_name][3]
 
@@ -942,13 +942,13 @@ for ds_name in experiment_name_list:
     #
     if ((arg_index_method_name != 'all') and \
         (index_name != arg_index_method_name)):
-      print
-      print '  Skipping index:', index_name
+      print()
+      print('  Skipping index:', index_name)
 
       continue
 
-    print
-    print ' ', index_method.description
+    print()
+    print(' ', index_method.description)
 
     time1 = time.time()
     index_method.build()
@@ -958,12 +958,12 @@ for ds_name in experiment_name_list:
 
     time3 = time.time()
 
-    print '    Time used (in sec): build: %.4f,  compact: %.4f' % \
-          (time2-time1, time3-time2)
+    print('    Time used (in sec): build: %.4f,  compact: %.4f' % \
+          (time2-time1, time3-time2))
 
     memory_usage_str = auxiliary.get_memory_usage()
     if (memory_usage_str != None):
-      print '    '+memory_usage_str
+      print('    '+memory_usage_str)
 
     # Calculate complexity and quality measures - - - - - - - - - - - - - - - -
     #
@@ -1049,10 +1049,10 @@ for ds_name in experiment_name_list:
 
     # print '** Total number of true matches:', tm
 
-    print '    Pairs completeness:  %.2f %%' % (pc*100.0)
+    print('    Pairs completeness:  %.2f %%' % (pc*100.0))
 
     pq = float(m) / float(num_rec_pairs)
-    print '    Pairs quality:       %.2f %%' % (pq*100.0)
+    print('    Pairs quality:       %.2f %%' % (pq*100.0))
 
 
     if (task == 'dedup'):
@@ -1062,10 +1062,10 @@ for ds_name in experiment_name_list:
       B = data_set2.num_records
       rr = 1 - float(num_rec_pairs) / (float(A)*float(B))
 
-    print '    Reduction ratio:     %.2f %%' % (rr*100.0)
+    print('    Reduction ratio:     %.2f %%' % (rr*100.0))
 
     memo_use = auxiliary.get_memory_usage_val()
-    print '    Memory usage:        %.2f MB' % (memo_use)
+    print('    Memory usage:        %.2f MB' % (memo_use))
 
     # Write into results file - - - - - - - - - - - - - - - - - - - - - - - - -
     # (data set name, index method name, num_rec_pairs, RR, PC, PQ, time and
@@ -1074,18 +1074,18 @@ for ds_name in experiment_name_list:
     res_file_str = '%s, %s, %d, %.4f, %.4f, %.4f, %.4f, %.2f' % \
                    (ds_name, index_name, num_rec_pairs, rr, pc, pq, time3-time1,
                     memo_use)
-    print '    Saved into results file: "%s"' % (res_file_str)
+    print('    Saved into results file: "%s"' % (res_file_str))
     res_file.write(res_file_str+os.linesep)
 
     del index_method  # Clean up memory
 
-  print
-  print
+  print()
+  print()
 
   del ds_index_list
   del data_set1
   del data_set2
 
-print 'Finished experiments at:', time.ctime()
+print('Finished experiments at:', time.ctime())
 
 # =============================================================================

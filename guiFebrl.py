@@ -68,7 +68,7 @@ import time
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 FEBRL_DIR = sys.path[0]  # Get the directory where Febrl is located
-print 'Febrl directory: %s' % (FEBRL_DIR)
+print('Febrl directory: %s' % (FEBRL_DIR))
 
 # May have to include non system wide site-packages
 #
@@ -125,7 +125,7 @@ try:
   import gtk.glade
   import pango
 except:
-  print "GTK and PyGTK not installed."
+  print("GTK and PyGTK not installed.")
   sys.exit(1)
 
 # Set the logging level to warnings - - - - - - - - - - - - - - - - - - - - - -
@@ -254,7 +254,7 @@ class MainFebrlWindow:
   def initFebrlProjectVariables(self, project_type='Deduplicate'):
 
     if (project_type not in ['Standardise', 'Deduplicate', 'Link', 'Geocode']):
-      raise Exception, 'Illegal project type provided: %s' % (project_type)
+      raise Exception('Illegal project type provided: %s' % (project_type))
 
     self.project_type = project_type
     self.project_name = None   # Will be set by New, Load or Save project
@@ -531,7 +531,7 @@ class MainFebrlWindow:
     elif (self.project_type == 'Geocode'):
       geocode_project_widget.set_active(True)
     else:
-      raise Exception, 'Illegal project type: %s' % (self.project_type)
+      raise Exception('Illegal project type: %s' % (self.project_type))
 
   # ---------------------------------------------------------------------------
   # Handle toggle of the project type button
@@ -551,10 +551,10 @@ class MainFebrlWindow:
     elif (widget_name == 'geocode_radio_button'):
       self.project_type = 'Geocode'
     else:
-      raise Exception, 'Illegal project type widget name: %s' % (widget_name)
+      raise Exception('Illegal project type widget name: %s' % (widget_name))
 
-    print
-    print ' *** Changed project type to:', self.project_type,'***'
+    print()
+    print(' *** Changed project type to:', self.project_type,'***')
 
     # For different project types set settings and visible pages - - - - - - -
     #
@@ -602,8 +602,8 @@ class MainFebrlWindow:
   def mainNotebookSwitchPage(self, widget, dummy, curr_page):
     # PyGTK FAQ 17.1: Needs these parameters!
 
-    print
-    print '*** Main notebook page switch ***'
+    print()
+    print('*** Main notebook page switch ***')
 
     notebook_widget = self.mainTree.get_widget('main_notebook')
 
@@ -624,19 +624,19 @@ class MainFebrlWindow:
       if (curr_page_active == True):
         self.main_notebook_curr_page = curr_page
 
-        print 'Switched from page %s to page %s' % \
-              (prev_page_name, curr_page_name)
-        print '  Current page number:', curr_page
+        print('Switched from page %s to page %s' % \
+              (prev_page_name, curr_page_name))
+        print('  Current page number:', curr_page)
 
       else:
-        print ' ************ else:', curr_page_name
+        print(' ************ else:', curr_page_name)
 
       self.displayCurrentNotebookPage()  # Re-display current notebook page
 
     else:  # Must be a page is being hidden, do nothing
-      print '  Stored current page: ', self.main_notebook_curr_page
-      print '  Widget.get_curr_page:', prev_page2
-      print '  Received curr page:  ', curr_page
+      print('  Stored current page: ', self.main_notebook_curr_page)
+      print('  Widget.get_curr_page:', prev_page2)
+      print('  Received curr page:  ', curr_page)
 
   # ---------------------------------------------------------------------------
   # Display the current main notebook page
@@ -656,7 +656,7 @@ class MainFebrlWindow:
     curr_page =      self.main_notebook_curr_page
     curr_page_name = self.main_notebook_page_names[curr_page]
 
-    print 'Display current page:', curr_page, curr_page_name
+    print('Display current page:', curr_page, curr_page_name)
 
     # If switched to Log or Evaluate page disable the Execute button - - - - -
     #
@@ -690,7 +690,7 @@ class MainFebrlWindow:
     elif(curr_page_name == 'Log'):
       self.logView()
     else:
-      raise Exception, 'Illegal notebook page name: %s' % (curr_page_name)
+      raise Exception('Illegal notebook page name: %s' % (curr_page_name))
 
   # ---------------------------------------------------------------------------
   # Handle clicks on Execute button
@@ -727,7 +727,7 @@ class MainFebrlWindow:
   # Handle clicks on Quit button or activate of Quit menu
   #
   def quitMain(self, widget):
-    print 'Clicked Quit or activated Quit menu'
+    print('Clicked Quit or activated Quit menu')
 
     # Check if project is modified or not, if not, ask for save
     #
@@ -750,7 +750,7 @@ class MainFebrlWindow:
   # Handle click on close window (x) - - - - - - - - - - - - - - - - - - - - -
   #
   def closeMainWindow(self, widget, event):
-    print 'Clicked close window'
+    print('Clicked close window')
 
     self.quitMain(widget)
 
@@ -760,7 +760,7 @@ class MainFebrlWindow:
   # Handle clicks on New button or activate of New menu
   #
   def newMain(self, widget):
-    print 'Clicked New or activated New menu'
+    print('Clicked New or activated New menu')
 
     # Check if project is modified or not, if not, ask for save
     #
@@ -802,10 +802,10 @@ class MainFebrlWindow:
       elif (geocode_widget.get_active() == True):
         self.project_type = 'Geocode'
       else:
-        raise Exception, 'No project type activated'
+        raise Exception('No project type activated')
 
-      print
-      print ' *** New project type:', self.project_type,'***'
+      print()
+      print(' *** New project type:', self.project_type,'***')
 
       self.initFebrlProjectVariables(self.project_type)
 
@@ -837,8 +837,8 @@ class MainFebrlWindow:
   # Handle clicks on Save button or activate of Save or Save As menu
   #
   def saveMain(self, widget):
-    print 'Clicked Save or activated Save or Save As menu, or Execute on' + \
-          'Output/Run page'
+    print('Clicked Save or activated Save or Save As menu, or Execute on' + \
+          'Output/Run page')
 
     widget_name = widget.get_name()
 
@@ -875,8 +875,8 @@ class MainFebrlWindow:
       if (self.save_dialog_file_name == None):
         return
 
-      print 'Selected file name in save dialog: %s' % \
-            (self.save_dialog_file_name)
+      print('Selected file name in save dialog: %s' % \
+            (self.save_dialog_file_name))
 
       # Make sure it is a Python file
       #
@@ -901,11 +901,11 @@ class MainFebrlWindow:
         if (overwrite == False):
           return
 
-      print 'Generate code and save it into file:', self.project_name
+      print('Generate code and save it into file:', self.project_name)
 
       febrl_project_code = self.generateAllCode()
 
-      print 'Generated %d lines of code' % (len(febrl_project_code))
+      print('Generated %d lines of code' % (len(febrl_project_code)))
 
       try:
         f = open(self.project_name, 'w')  # Save into a text file
@@ -932,7 +932,7 @@ class MainFebrlWindow:
   # Handle activation of Online Help menu item
   #
   def activateOnlineHelp(self):
-    print 'Online help activated - to be implemented...'
+    print('Online help activated - to be implemented...')
 
   # How to open the Web browser and an URL?
 
@@ -946,7 +946,7 @@ class MainFebrlWindow:
   # Handle activation of About menu item
   #
   def activateAbout(self, widget):
-    print 'About activated'
+    print('About activated')
 
     self.aboutTree = gtk.glade.XML(self.glade_file_name,
                                    self.about_dialog_name)
@@ -955,13 +955,13 @@ class MainFebrlWindow:
     self.aboutDialog.run()
     self.aboutDialog.destroy()
 
-    print 'About finished'
+    print('About finished')
 
   # ---------------------------------------------------------------------------
   # Handle activation of License menu item
   #
   def activateLicense(self, widget):
-    print 'License activated'
+    print('License activated')
 
     self.licenseTree = gtk.glade.XML(self.glade_file_name,
                                      self.license_dialog_name)
@@ -970,7 +970,7 @@ class MainFebrlWindow:
     self.licenseDialog.run()
     self.licenseDialog.destroy()
 
-    print 'License finished'
+    print('License finished')
 
   # ---------------------------------------------------------------------------
   # Generate a message dialog for information, warning, error, question or
@@ -981,7 +981,7 @@ class MainFebrlWindow:
   def messageDialog(self, message_str, message_type):
 
     if (message_type[:4] not in ['info','warn','ques','erro','c_qu']):
-      raise Exception, 'Illegal message type: %s' % (message_type)
+      raise Exception('Illegal message type: %s' % (message_type))
 
     gtk_msg_type = {'info':gtk.MESSAGE_INFO,
                     'warn':gtk.MESSAGE_WARNING,
@@ -1028,7 +1028,7 @@ class MainFebrlWindow:
   #
   def setWindowTitle(self, title_str=None):
 
-    print 'Set window title'
+    print('Set window title')
 
     if (title_str == None):
       if (self.project_name == None):
@@ -1041,7 +1041,7 @@ class MainFebrlWindow:
     if (sum(self.modified.values()) > 0):
       win_project_name += '*'
 
-    print '  New project name:', win_project_name
+    print('  New project name:', win_project_name)
 
     self.mainWin.set_title('Febrl - '+win_project_name)
 
@@ -1070,7 +1070,7 @@ class MainFebrlWindow:
   # Display the Data page according to if data set(s) is/are initialised or not
   #
   def dataView(self):  # A switch to the Data page
-    print '  Switched to Data page - Display this page'
+    print('  Switched to Data page - Display this page')
 
     # Get type of project: Linkage (2 data sets) or others (1 data set)
     #
@@ -1230,12 +1230,12 @@ class MainFebrlWindow:
       data_set_type_name = widget_name[9:12].upper()  # Get data set type name
 
       if (data_set_type_name not in self.data_set_type_page_dict.keys()):
-        raise Exception, 'Illegal data set type widget name: %s' % \
-                         (widget_name)
+        raise Exception('Illegal data set type widget name: %s' % \
+                         (widget_name))
 
       self.data_set_type_list[data_set_index] = data_set_type_name
 
-      print 'Data set type changed:', data_set_index, self.data_set_type_list
+      print('Data set type changed:', data_set_index, self.data_set_type_list)
 
       # Set default information for this data set (keep missing values list)
       #
@@ -1285,7 +1285,7 @@ class MainFebrlWindow:
   # Handle toggle of the header line check buttons
   #
   def dataSetTypeHeaderLineToggle(self, widget):
-    print 'Header line toggle'
+    print('Header line toggle')
 
     widget_name = widget.get_name()
     data_set_ind = {'_a':0, '_b':1}[widget_name[-2:]]
@@ -1315,7 +1315,7 @@ class MainFebrlWindow:
   # Handle toggle of the strip fields check buttons
   #
   def dataSetTypeStripFieldsToggle(self, widget):
-    print 'Strip fields toggle'
+    print('Strip fields toggle')
 
     widget_name = widget.get_name()
     data_set_ind = {'_a':0, '_b':1}[widget_name[-2:]]
@@ -1330,7 +1330,7 @@ class MainFebrlWindow:
   # Handle changes in the missing values text entry field(s)
   #
   def dataSetMissValueActivate(self, widget):
-    print 'Missing values activated'
+    print('Missing values activated')
 
     widget_name = widget.get_name()
     data_set_index = {'_a':0, '_b':1}[widget_name[-2:]]
@@ -1351,7 +1351,7 @@ class MainFebrlWindow:
   # Handle changes in the delimiter text entry field(s)
   #
   def dataSetDelimiterActivate(self, widget):
-    print 'Delimiter activated'
+    print('Delimiter activated')
 
     widget_name = widget.get_name()
     data_set_index = {'_a':0, '_b':1}[widget_name[-2:]]
@@ -1385,7 +1385,7 @@ class MainFebrlWindow:
   # Handle selection of a file name (file name buttons)
   #
   def dataFileSelect(self, widget):
-    print 'File selected, name:', widget.get_filename()
+    print('File selected, name:', widget.get_filename())
 
     widget_name = widget.get_name()
     data_set_index = {'_a':0, '_b':1}[widget_name[-2:]]
@@ -1395,7 +1395,7 @@ class MainFebrlWindow:
     if (file_name != None):  # Do nothing if no file name is returned
 
       self.current_folder = widget.get_current_folder()
-      print 'current folder:', self.current_folder
+      print('current folder:', self.current_folder)
 
       data_set_type_name = widget_name[:3].upper()  # First three characters
 
@@ -1446,7 +1446,7 @@ class MainFebrlWindow:
   # Get the first several lines from the data set
   #
   def getDataSetFromFile(self, data_set_index):
-    print 'Get data set data'
+    print('Get data set data')
 
     file_name = self.data_set_info_list[data_set_index]['file_name']
 
@@ -1486,7 +1486,7 @@ class MainFebrlWindow:
   # Generate the combo box for the record identifier field
   #
   def generateRecIDField(self, data_set_index) :
-    print 'generate record identifier field combo box'
+    print('generate record identifier field combo box')
 
     data_set_suffix = {0:'_a', 1:'_b'}[data_set_index]
 
@@ -1528,7 +1528,7 @@ class MainFebrlWindow:
   # Generate the data view (for either data set A or B)
   #
   def generateDataView(self, data_set_index):
-    print 'Generate data set view'
+    print('Generate data set view')
 
     raw_file_data = self.data_set_info_list[data_set_index]['file_data']
 
@@ -1601,10 +1601,10 @@ class MainFebrlWindow:
 
     elif (data_set_type == 'SQL'):  # - - - - - - - - - - - - - - - - - - -
 
-      print 'SQL data set to be implemented' #############################
+      print('SQL data set to be implemented') #############################
 
     else:
-      raise Exception,  'Illegal data set type: %s' % (data_set_type)
+      raise Exception('Illegal data set type: %s' % (data_set_type))
 
     # Now check if any of these values are designated as missing values
     #
@@ -1674,8 +1674,8 @@ class MainFebrlWindow:
 
     data_store = gtk.ListStore(*columns)  # (see PyGTK FAQ 13.10)
 
-    print 'culumns', columns
-    print 'data_store', data_store
+    print('culumns', columns)
+    print('data_store', data_store)
 
     # If header line is ticked (taken from file) don't allow editing of names
     #
@@ -1750,8 +1750,8 @@ class MainFebrlWindow:
 
     data_store[path][col_num] = new_value
 
-    print 'Header line column %d edited for data set %d, new value: %s' %\
-          (col_num, data_set_index, new_value)
+    print('Header line column %d edited for data set %d, new value: %s' %\
+          (col_num, data_set_index, new_value))
 
     self.comp_std_list = []  # Clear all component standardisers
 
@@ -1977,7 +1977,7 @@ class MainFebrlWindow:
     elif (self.project_type == 'Standardise'):
       self.main_notebook_page_active_dict['Standardise'] = True
     else:  # Geocoding - TODO
-      print 'Geocoding not implemented yet'
+      print('Geocoding not implemented yet')
 
     self.index_def = [] # Delete all previous index definitions
     self.index_num = 0
@@ -1995,7 +1995,7 @@ class MainFebrlWindow:
   # Display the Explore page
   #
   def exploreView(self):
-    print '  Switched to Explore page - Display this page'
+    print('  Switched to Explore page - Display this page')
 
     # Set font in text view to fixed width
     #
@@ -2033,14 +2033,14 @@ class MainFebrlWindow:
       if (explore_widget_b.get_active() == True):
          analyse_data_set[1] = True
 
-    print analyse_data_set
+    print(analyse_data_set)
 
     # Get analysis mode (values or words) - - - - - - - - - - - - - - - - - - -
     #
     values_widget = self.mainTree.get_widget('explore_values_radio_button')
     word_analysis = not values_widget.get_active()
 
-    print 'word analysis:', word_analysis
+    print('word analysis:', word_analysis)
 
     # Check if sampling activated and if so get sampling rate - - - - - - - - -
     #
@@ -2210,7 +2210,7 @@ class MainFebrlWindow:
   # Display the Standardise page
   #
   def standardView(self):
-    print '  Switched to Standardise page - Display this page'
+    print('  Switched to Standardise page - Display this page')
 
     std_scrolled_window = self.mainTree.get_widget('standard_scrolled_window')
 
@@ -2238,7 +2238,7 @@ class MainFebrlWindow:
     # Now show existing component standardisers - - - - - - - - - - - - - - - -
     #
     for comp_std in self.comp_std_list:
-      print 'comp_std:', comp_std
+      print('comp_std:', comp_std)
 
       # A comp_std is a dictionary with keys: type, in_field_list,
       # out_field_list, plus type specific parameters
@@ -2337,7 +2337,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
   #
   def clickAddStandardiserButton(self, widget, add_comp_std_box):
-    print 'Clicked "Add new component standardiser"'
+    print('Clicked "Add new component standardiser"')
 
     comp_std_type = widget.get_label()[:4]  # The type of comp. std. to add
 
@@ -2394,7 +2394,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
   #
   def clickDelCompStdButton(self, widget, add_comp_std_box):
-    print 'Clicked "Delete last component standardiser"'
+    print('Clicked "Delete last component standardiser"')
 
     std_scrolled_window = self.mainTree.get_widget('standard_scrolled_window')
 
@@ -2836,7 +2836,7 @@ class MainFebrlWindow:
   #
   def runClickedStandardFileButton(self, widget):
     widget_name = widget.get_name()
-    print 'Clicked on a standardise file button: %s' % (widget_name)
+    print('Clicked on a standardise file button: %s' % (widget_name))
 
     # Create file dialog
     #
@@ -2895,7 +2895,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
   #
   def clickAddStdInFieldButton(self, widget, add_in_field_box):
-    print 'Clicked "Add new comp. std. input field"'
+    print('Clicked "Add new comp. std. input field"')
 
     # The VBox with all input fields
     #
@@ -2940,7 +2940,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
   #
   def clickDelStdInFieldButton(self, widget, add_in_field_box):
-    print 'Clicked "Delete last comp. std. input field"'
+    print('Clicked "Delete last comp. std. input field"')
 
     # The VBox with all input fields
     #
@@ -3024,7 +3024,7 @@ class MainFebrlWindow:
         in_field_list.append(in_field_val)
 
       this_comp_std_dict['in_field_list'] = in_field_list
-      print 'in field list:', in_field_list
+      print('in field list:', in_field_list)
 
       # Extract the parameters and check their values - - - - - - - - - - - - -
       #
@@ -3176,11 +3176,11 @@ class MainFebrlWindow:
         return
 
       this_comp_std_dict['out_field_list'] = out_field_list
-      print 'out field list:', out_field_list
+      print('out field list:', out_field_list)
 
       comp_std_list[i] = this_comp_std_dict
 
-    print 'comp_std_list:', comp_std_list
+    print('comp_std_list:', comp_std_list)
 
     # Now generate the Febrl codes for standardisation - - - - - - - - - - - -
     #
@@ -3430,7 +3430,7 @@ class MainFebrlWindow:
   # Display the Index page
   #
   def indexView(self):
-    print '  Switched to Index page - Display this page'
+    print('  Switched to Index page - Display this page')
 
     # Set alignment for separator string label to the right
     #
@@ -3452,7 +3452,7 @@ class MainFebrlWindow:
       index_method_box3.remove(child)
 
     index_dict = self.index_method  # For quicker access
-    print 'index dict:', index_dict
+    print('index dict:', index_dict)
 
     # Check if an index method has previously been selected
     #
@@ -3831,7 +3831,7 @@ class MainFebrlWindow:
     #
     index_num = 1
     for index_list in self.index_def:
-      print 'index_list:', index_list
+      print('index_list:', index_list)
 
       index_num_label = gtk.Label('<b>Index %d:</b>' % (index_num))
       index_num_label.set_use_markup(True)
@@ -3840,7 +3840,7 @@ class MainFebrlWindow:
       index_num_label.show()
 
       for index_def_tuple in index_list:  # Each index is one or more tuple
-        print 'index_def:', index_def_tuple
+        print('index_def:', index_def_tuple)
 
         [new_index_def1, new_index_def2] = self.new_index_def(index_def_tuple)
         index_def_box.pack_start(new_index_def1, False, False, 0)
@@ -3892,7 +3892,7 @@ class MainFebrlWindow:
 #    else:
 #      del_index_def = True
 
-    print add_index_def, del_index_def, del_index
+    print(add_index_def, del_index_def, del_index)
 ###
 
     button_box = self.create_index_buttons(add_index_def, del_index_def,
@@ -3906,7 +3906,7 @@ class MainFebrlWindow:
   # Handle a click on the 'Add new index' button
   #
   def clickAddIndexButton(self, widget, add_index_box):
-    print 'Clicked "Add new index"'
+    print('Clicked "Add new index"')
 
     scrolled_window = self.mainTree.get_widget('index_scrolled_window')
 
@@ -3950,7 +3950,7 @@ class MainFebrlWindow:
   # Handle a click on the 'Add new index definition' button
   #
   def clickAddIndexDefButton(self, widget, add_index_box):
-    print 'Clicked "Add new index definition"'
+    print('Clicked "Add new index definition"')
 
     scrolled_window = self.mainTree.get_widget('index_scrolled_window')
 
@@ -3992,7 +3992,7 @@ class MainFebrlWindow:
   # Handle a click on the 'Delete last index' button
   #
   def clickDelIndexButton(self, widget, add_index_box):
-    print 'Clicked "delete last index"'
+    print('Clicked "delete last index"')
 
     scrolled_window = self.mainTree.get_widget('index_scrolled_window')
 
@@ -4045,7 +4045,7 @@ class MainFebrlWindow:
   # Handle a click on the 'Delete last index definition' button
   #
   def clickDelIndexDefButton(self, widget, add_index_box):
-    print 'Clicked "Delete last index definition"'
+    print('Clicked "Delete last index definition"')
 
     scrolled_window = self.mainTree.get_widget('index_scrolled_window')
 
@@ -4267,7 +4267,7 @@ class MainFebrlWindow:
   # Handle a change of the index method in combo box
   #
   def indexChangeMethod(self, widget):
-    print 'Changed index method in combo box to:', widget.get_active()
+    print('Changed index method in combo box to:', widget.get_active())
 
     new_index_method = self.index_names[widget.get_active()]
 
@@ -4543,7 +4543,7 @@ class MainFebrlWindow:
       else:
         index_dict['doDedup'] = check_box_list[1].get_active()
 
-    print 'index_dict:', index_dict
+    print('index_dict:', index_dict)
 
     # Process index definition details - - - - - - - - - - - - - - - - - - - -
     #
@@ -4645,7 +4645,7 @@ class MainFebrlWindow:
           index_def_list = []  # Clear for a new index
           i += 2  # Skip separator and 'Index' label
 
-      print 'index_def:', self.index_def
+      print('index_def:', self.index_def)
 
     # Now generate the Febrl codes for indexing - - - - - - - - - - - - - - - -
     #
@@ -4863,7 +4863,7 @@ class MainFebrlWindow:
   # ===========================================================================
 
   def compareView(self):  # A switch to the Compare page ----------------------
-    print '  Switched to Compare page - Display this page'
+    print('  Switched to Compare page - Display this page')
 
     comp_scrolled_window = self.mainTree.get_widget('comp_scrolled_window')
 
@@ -4886,7 +4886,7 @@ class MainFebrlWindow:
     # Now show existing field comparisons - - - - - - - - - - - - - - - - - - -
     #
     for comp_funct in self.field_comp_list:
-      print 'comp_funct:', comp_funct
+      print('comp_funct:', comp_funct)
 
       hbox_list = self.new_field_comp(comp_funct)
       for hbox in hbox_list:
@@ -4944,7 +4944,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
 
   def clickAddCompFunctButton(self, widget, add_comp_funct_box):
-    print 'Clicked "Add new comparison function"'
+    print('Clicked "Add new comparison function"')
 
     comp_scrolled_window = self.mainTree.get_widget('comp_scrolled_window')
 
@@ -4985,7 +4985,7 @@ class MainFebrlWindow:
   # ---------------------------------------------------------------------------
 
   def clickDelCompFunctButton(self, widget, add_comp_funct_box):
-    print 'Clicked "Delete last comparison function"'
+    print('Clicked "Delete last comparison function"')
 
     comp_scrolled_window = self.mainTree.get_widget('comp_scrolled_window')
 
@@ -5025,7 +5025,7 @@ class MainFebrlWindow:
   # An activate of a field comparison function name
   #
   def compChangeFunction(self, widget):
-    print 'Changed field comparison function to:', widget.get_active()
+    print('Changed field comparison function to:', widget.get_active())
 
     field_comp_name_index = widget.get_active()
 
@@ -5045,7 +5045,7 @@ class MainFebrlWindow:
     field_comp_names = self.field_comp_dict.keys()
     field_comp_names.sort()
     new_field_comp_name = field_comp_names[field_comp_name_index]
-    print '  New name:', new_field_comp_name
+    print('  New name:', new_field_comp_name)
 
     field_comp_index = 0
     child_index = 0
@@ -5209,7 +5209,7 @@ class MainFebrlWindow:
       return field_comp_list  # No more details to add
 
     comp_name = self.field_comp_dict[field_comp_dict['name']]
-    print 'comp_name:', comp_name
+    print('comp_name:', comp_name)
 
     # Show the field comparison function specific parameters - - - - - - - - -
     #
@@ -5660,7 +5660,7 @@ class MainFebrlWindow:
     field_comp_list = self.field_comp_list  # List of field comparison details
     num_comp_funct =  len(field_comp_list)
 
-    print 'Number of comparison functions:', num_comp_funct
+    print('Number of comparison functions:', num_comp_funct)
 
     hbox_index = 0  # Counter in the horizontal boxes in the scrolled window
 
@@ -5757,7 +5757,7 @@ class MainFebrlWindow:
       #
       if (comp_name not in ['FieldComparatorExactString',
                             'FieldComparatorContainsString']): # Process param.
-        print 'comp_name:', comp_name
+        print('comp_name:', comp_name)
 
         hbox_index += 1  # Next box with function specific parameters
 
@@ -6038,8 +6038,8 @@ class MainFebrlWindow:
 
       field_comp_list[fc] = field_comp_dict  # Save it into list PC 20/09
 
-      print 'hbox_index:', hbox_index
-      print 'FC-dict:', fc, field_comp_dict  #  TEST
+      print('hbox_index:', hbox_index)
+      print('FC-dict:', fc, field_comp_dict)  #  TEST
 
     # Now generate the Febrl codes for comparisons - - - - - - - - - - - - - -
     #
@@ -6264,7 +6264,7 @@ class MainFebrlWindow:
   # initialised or not
   #
   def classifyView(self):  # A switch to the Classify page
-    print '  Switched to Classify page - Display this page'
+    print('  Switched to Classify page - Display this page')
 
     classification_widget = self.mainTree.get_widget('classify_page_box')
     classifier_method_widget = \
@@ -6803,7 +6803,7 @@ class MainFebrlWindow:
   # Handle a change of the classification method in combo box
   #
   def classifierChangeMethod(self, widget):
-    print 'Changed classification method in combo box to:', widget.get_active()
+    print('Changed classification method in combo box to:', widget.get_active())
 
     new_classifier_method = self.classifier_names[widget.get_active()]
 
@@ -6817,7 +6817,7 @@ class MainFebrlWindow:
   # Handle a change of the match method for two-step classifier
   #
   def classifyTwoStepChangeMatchMethod(self, widget):
-    print 'Changed two-step match method'
+    print('Changed two-step match method')
 
     classifier_dict = self.classifier_method  # For quicker access
 
@@ -6868,7 +6868,7 @@ class MainFebrlWindow:
   # Handle a change of the non-match method for two-step classifier
   #
   def classifyTwoStepChangeNonMatchMethod(self, widget):
-    print 'Changed two-step non-match method'
+    print('Changed two-step non-match method')
 
     classifier_dict = self.classifier_method  # For quicker access
 
@@ -6921,7 +6921,7 @@ class MainFebrlWindow:
   # Handle a change of the random selection method for two-step classifier
   #
   def classifyTwoStepChangeRandSel(self, widget):
-    print 'Changed two-step random selection method'
+    print('Changed two-step random selection method')
 
     classifier_dict = self.classifier_method  # For quicker access
 
@@ -6970,7 +6970,7 @@ class MainFebrlWindow:
   # Handle a change of the random selection method for two-step classifier
   #
   def classifyTwoStepChangeClassifier(self, widget):
-    print 'Changed two-step classifier method'
+    print('Changed two-step classifier method')
 
     classifier_dict = self.classifier_method  # For quicker access
 
@@ -7492,10 +7492,10 @@ class MainFebrlWindow:
   # initialised or not
   #
   def runView(self):
-    print '  Switched to Output/Run page - Display this page'
+    print('  Switched to Output/Run page - Display this page')
 
     output_dict = self.output_dict  # Shortcut
-    print output_dict
+    print(output_dict)
 
     # Switch to note book page according to project type
     #
@@ -7723,7 +7723,7 @@ class MainFebrlWindow:
   #
   def runSaveFileButtonToggle(self, widget):
     widget_name = widget.get_name()
-    print 'Toggled one of the save file buttons: %s' % (widget_name)
+    print('Toggled one of the save file buttons: %s' % (widget_name))
 
     if ('w_vec' in widget_name):
       self.output_dict['w_vec_file'] = (not self.output_dict['w_vec_file'][0],
@@ -7742,7 +7742,7 @@ class MainFebrlWindow:
                                         self.output_dict['m_datasets'][1],
                                         self.output_dict['m_datasets'][2])
     else:
-      print widget_name
+      print(widget_name)
       raise Exception
 
     self.runView()  # Re-display Output/Run page
@@ -7752,7 +7752,7 @@ class MainFebrlWindow:
   #
   def runClickedFileNameButton(self, widget):
     widget_name = widget.get_name()
-    print 'Clicked on of the file name buttons: %s' % (widget_name)
+    print('Clicked on of the file name buttons: %s' % (widget_name))
 
     # Create file dialog
     #
@@ -7800,7 +7800,7 @@ class MainFebrlWindow:
         #
         if (self.output_dict['w_vec_file'][1] != self.save_dialog_file_name):
           self.re_run['w_vec_generate'] = True
-          print 'XXXX changed w-vec file name', self.save_dialog_file_name
+          print('XXXX changed w-vec file name', self.save_dialog_file_name)
 
         self.output_dict['w_vec_file'] = (self.output_dict['w_vec_file'][0],
                                           self.save_dialog_file_name)
@@ -7830,7 +7830,7 @@ class MainFebrlWindow:
         self.output_dict['std_out_file'] = self.save_dialog_file_name
 
       else:
-        print widget_name, self.save_dialog_file_name
+        print(widget_name, self.save_dialog_file_name)
         raise Exception
 
       self.runView()  # Re-display Output/Run page
@@ -7841,7 +7841,7 @@ class MainFebrlWindow:
   def runExecute(self):
     output_dict = self.output_dict  # Shortcut
 
-    print 'output_dict (1)', output_dict
+    print('output_dict (1)', output_dict)
 
     self.febrl_code['output'] = None  # Remove all previous output code
 
@@ -7881,7 +7881,7 @@ class MainFebrlWindow:
       pass_field_list.reverse()  # As children are bottom to top in table
       output_dict['pass_field_list'] = pass_field_list
 
-      print 'output_dict (2)', output_dict
+      print('output_dict (2)', output_dict)
 
       # Now generate the Febrl codes for output - - - - - - - - - - - - - - - -
       #
@@ -7924,7 +7924,7 @@ class MainFebrlWindow:
         elif (comp_std_type == 'Name'):
           comp_std_name_list.append('name_comp_std_%d' % (i+1))
         else:
-          raise Exception, 'This should not happen: %s' % (comp_std_type)
+          raise Exception('This should not happen: %s' % (comp_std_type))
 
         for out_field in cs_out_field_list:
 
@@ -8154,7 +8154,7 @@ class MainFebrlWindow:
             return
 
           field_name_a_list = self.data_set_info_list[0]['field_names']
-          print field_name_a_list, fna
+          print(field_name_a_list, fna)
           if (fna in field_name_a_list):
             self.messageDialog('Match identifier field name has to be ' + \
                                'different from all other data set field ' + \
@@ -8167,7 +8167,7 @@ class MainFebrlWindow:
                                           (output_dict['m_datasets'][2][0],
                                            fnb))
 
-      print 'output_dict (2)', output_dict
+      print('output_dict (2)', output_dict)
 
       # Now generate the Febrl codes for output - - - - - - - - - - - - - - - -
       #
@@ -8258,7 +8258,7 @@ class MainFebrlWindow:
   # Method to generate all code for a Febrl project module.
   #
   def generateAllCode(self):
-    print 'Generate all code.'
+    print('Generate all code.')
 
     license_boiler_pate = [
       'AUSTRALIAN NATIONAL UNIVERSITY OPEN SOURCE LICENSE (ANUOS LICENSE)',
@@ -8522,7 +8522,7 @@ class MainFebrlWindow:
           else:  # Get the index of the match status field
             match_status_field_index = \
                                     self.exact_comp_list[match_status_field][1]
-            print match_status_field_index
+            print(match_status_field_index)
 
             febrl_code.append('# Define function to get the match status')
             febrl_code.append('#')
@@ -8645,7 +8645,7 @@ class MainFebrlWindow:
   # Method to run code for a Febrl standardisation project
   #
   def runStdCode(self):
-    print 'Run standardisation code:'
+    print('Run standardisation code:')
 
     # Check if all necessary components have been initialised
     #
@@ -8895,7 +8895,7 @@ class MainFebrlWindow:
   # Method to run code for a Febrl linkage or deduplication project
   #
   def runLinkCode(self):
-    print 'Run linkage or deduplication code:', self.re_run
+    print('Run linkage or deduplication code:', self.re_run)
 
     # Check if all necessary components have been initialised
     #
@@ -8912,7 +8912,7 @@ class MainFebrlWindow:
     # Initialise first data set - - - - - - - - - - - - - - - - - - - - - - - -
     #
     if (self.re_run['data_init'] == True):  # Was modified, so have to re-do
-      print 'Re-initialise data sets'
+      print('Re-initialise data sets')
 
       data_set_info = self.data_set_info_list[0]  # Details for first data set
 
@@ -9031,7 +9031,7 @@ class MainFebrlWindow:
       self.writeStatusBar('No need to re-initialised data set(s).')
 
     if (self.re_run['w_vec_generate'] == True):  # Re-generate weight vectors
-      print 'Re-generate weight vectors'
+      print('Re-generate weight vectors')
 
       # Initialise field and record comparators - - - - - - - - - - - - - - - -
       #
@@ -9336,14 +9336,14 @@ class MainFebrlWindow:
               compressor = comp_funct_dict['compressor'])
 
         else:
-          raise Exception, 'Illegal field comparison method: %s' % \
-                           (comp_funct_name)
+          raise Exception('Illegal field comparison method: %s' % \
+                           (comp_funct_name))
 
         # Append tuple to list of comparison functions
         #
         field_comp_list.append((cf, field_a_name, field_b_name))
 
-      print 'field_comp_list:', field_comp_list ############################
+      print('field_comp_list:', field_comp_list) ############################
 
       # Define the record comparator
       #
@@ -9357,7 +9357,7 @@ class MainFebrlWindow:
       index_def_list = []
 
       for index_list in self.index_def:
-        print 'index_list:', index_list
+        print('index_list:', index_list)
 
         this_index_list = []
 
@@ -9399,8 +9399,8 @@ class MainFebrlWindow:
               encode_list = [encode.get_substring, int(p1), int(p2)]
 
             else:
-              raise Exception, 'Illegal phonetic encoding function: %s' % \
-                               (encode_funct)
+              raise Exception('Illegal phonetic encoding function: %s' % \
+                               (encode_funct))
 
             if ((encode_funct != 'Substring') and \
                 (encode_funct_param not in ['None', None, ''])):
@@ -9411,7 +9411,7 @@ class MainFebrlWindow:
 
         index_def_list.append(this_index_list)
 
-      print 'index_def_list:', index_def_list ############################
+      print('index_def_list:', index_def_list) ############################
 
       # Initialise the indexing method - - - - - - - - - - - - - - - - - - - -
       #
@@ -9652,9 +9652,9 @@ class MainFebrlWindow:
                                         block_method = block_method)
 
       else:
-        raise Exception, 'Illegal indexing method: %s' % (index_method_name)
+        raise Exception('Illegal indexing method: %s' % (index_method_name))
 
-      print index
+      print(index)
 
       self.writeStatusBar('Initalised index definitions and indexing method.')
 
@@ -9787,17 +9787,17 @@ class MainFebrlWindow:
                                           s2_classifier = s2_classifier)
 
     else:
-      raise Exception, 'Illegal classifier method: %s' % \
-                       (classifier_method_name)
+      raise Exception('Illegal classifier method: %s' % \
+                       (classifier_method_name))
 
-    print classifier
+    print(classifier)
 
     self.writeStatusBar('Initialised weight vector classifier.')
 
     # Now build, compact and run the indexing - - - - - - - - - - - - - - - - -
     #
     if (self.re_run['w_vec_generate'] == True):  # Re-generate weight vectors
-      print 'Re-generate weight vectors (part 2: build, compact and run index)'
+      print('Re-generate weight vectors (part 2: build, compact and run index)')
 
       self.init_progress_bar('Build index:')
       start_time = time.time()
@@ -9862,7 +9862,7 @@ class MainFebrlWindow:
     # Classify weight vectors according to classification method - - - - - - -
     #
     if (classifier_method_name in ['OptimalThreshold','SuppVecMachine']):
-      print 'Train supervised classifier', classifier_method_name
+      print('Train supervised classifier', classifier_method_name)
 
       # For supervised classifier get true match status and then corresponding
       # true match and non-match sets
@@ -9897,7 +9897,7 @@ class MainFebrlWindow:
       self.true_match_set = [tm_set, tnm_set]
 
     else:  # Unsupervised classification - - - - - - - - - - - - - - - - - - -
-      print 'Train un-supervised classifier', classifier_method_name
+      print('Train un-supervised classifier', classifier_method_name)
 
       self.class_w_vec_dict = w_vec_dict
       self.match_status_funct = None
@@ -10031,7 +10031,7 @@ class MainFebrlWindow:
   # Display the Evaluate page
   #
   def evaluateView(self):
-    print '  Switched to Evaluate page - Display this page'
+    print('  Switched to Evaluate page - Display this page')
 
     # Check that there are weight vectors to classify
     #
@@ -10355,7 +10355,7 @@ class MainFebrlWindow:
   # ===========================================================================
 
   def reviewView(self):  # A switch to the Review page ------------------------
-    print '  Switched to Review page - Display this page'
+    print('  Switched to Review page - Display this page')
 
 
   def reviewExecute(self):  # An Execute on the Review page -------------------
@@ -10367,7 +10367,7 @@ class MainFebrlWindow:
   # ===========================================================================
 
   def logView(self):  # A switch to the Log page ------------------------------
-    print '  Switched to Log page - Display this page'
+    print('  Switched to Log page - Display this page')
 
     self.log_page_buffer.set_text(self.log_page_text)  # Print what is in log
 

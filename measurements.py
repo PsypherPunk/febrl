@@ -562,7 +562,7 @@ def get_examples_quality(match_set, true_match_set, non_match_set,
     elif m in true_non_match_set:
       fp += 1
     else:
-      print m
+      print(m)
 
   for nm in non_match_set:
     if nm in true_non_match_set:
@@ -570,7 +570,7 @@ def get_examples_quality(match_set, true_match_set, non_match_set,
     elif nm in true_match_set:
       fn += 1
     else:
-      print nm
+      print(nm)
 
   assert (tp+fp) == len(match_set)
   assert (tn+fn) == len(non_match_set)

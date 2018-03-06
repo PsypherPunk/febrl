@@ -61,7 +61,7 @@ import stringcmp
 import indexing
 
 def print_log(x):  # Function to be used as 'log_funct'
-  print x
+  print(x)
 
 # =============================================================================
 

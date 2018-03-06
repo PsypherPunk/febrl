@@ -203,7 +203,7 @@ string_replace = ["'./,+:-_\\()[]<>{}", \
 # Characters in the first list are replaced by the corresponding character in
 # the second list
 
-replace_table = string.maketrans(string_replace[0], string_replace[1])
+replace_table = str.maketrans(string_replace[0], string_replace[1])
 
 # =============================================================================
 
@@ -551,8 +551,8 @@ if (__name__ == '__main__'):
                    '09 6131 6116',
                    '09 61316116',
                    '']
-  print
+  print()
   for pn in phone_numbers:
     res = str_to_phonenum(pn)
-    print pn, res
-    print
+    print(pn, res)
+    print()

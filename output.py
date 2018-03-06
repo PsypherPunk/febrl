@@ -243,8 +243,8 @@ def GenerateHistogram(w_vec_dict, bin_width, file_name=None, match_sets=None):
     logging.info('Histogram written to file: %s' % (file_name))
 
   if (match_sets != None):
-    print match_histo_dict.items()
-    print non_match_histo_dict.items()
+    print(match_histo_dict.items())
+    print(non_match_histo_dict.items())
 
   return histo_list
 

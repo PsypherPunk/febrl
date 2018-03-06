@@ -868,7 +868,7 @@ class hmm:
     msg.append('')
 
     for line in msg:
-      print line
+      print(line)
       logging.info(line)
 
 # =============================================================================
