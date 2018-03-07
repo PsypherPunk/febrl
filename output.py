@@ -149,7 +149,7 @@ def GenerateHistogram(w_vec_dict, bin_width, file_name=None, match_sets=None):
 
   # Loop over weight vectors - - - - - - - - - - - - - - - - - - - - - - - - -
   #
-  for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+  for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
     w_sum = sum(w_vec)  # Sum all weight vector elements
     binned_w = w_sum - (w_sum % bin_width)

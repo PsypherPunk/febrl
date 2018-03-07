@@ -169,7 +169,7 @@ def pairs_completeness(weight_vec_dict, dataset1, dataset2, get_id_funct,
     logging.info('  Number of unique entity identifiers in data set 1: %d' % \
                  (len(entity_ident_dict)))
 
-    for (ent_id, rec_list) in entity_ident_dict.iteritems():
+    for (ent_id, rec_list) in entity_ident_dict.items():
       num_this_rec = len(rec_list)
 
       if (num_this_rec > 1):
@@ -278,7 +278,7 @@ def pairs_completeness(weight_vec_dict, dataset1, dataset2, get_id_funct,
   num_true_matches =  0
   num_false_matches = 0
 
-  for (rec_id_tuple, this_vec) in weight_vec_dict.iteritems():
+  for (rec_id_tuple, this_vec) in weight_vec_dict.items():
 
     if (match_check_funct(rec_id_tuple[0], rec_id_tuple[1], this_vec) == True):
       num_true_matches += 1
@@ -345,7 +345,7 @@ def pairs_quality(weight_vec_dict, match_check_funct):
   num_true_matches =  0
   num_false_matches = 0
 
-  for (rec_id_tuple, this_vec) in weight_vec_dict.iteritems():
+  for (rec_id_tuple, this_vec) in weight_vec_dict.items():
 
     if (match_check_funct(rec_id_tuple[0], rec_id_tuple[1], this_vec) == True):
       num_true_matches += 1

@@ -10059,7 +10059,7 @@ class MainFebrlWindow:
         min_w = 99999.99  # Global minimum and maximum summed weights needed
         max_w = -9999.99  # for histogram
 
-        for (rec_id_tuple, w_vec) in self.class_w_vec_dict.iteritems():
+        for (rec_id_tuple, w_vec) in self.class_w_vec_dict.items():
           w_sum = sum(w_vec)
           min_w = min(min_w, w_sum)
           max_w = max(max_w, w_sum)
@@ -10110,7 +10110,7 @@ class MainFebrlWindow:
         min_w = 99999.99  # Global minimum and maximum summed weights needed
         max_w = -9999.99  # for histogram
 
-        for (rec_id_tuple, w_vec) in self.class_w_vec_dict.iteritems():
+        for (rec_id_tuple, w_vec) in self.class_w_vec_dict.items():
           w_sum = sum(w_vec)
           min_w = min(min_w, w_sum)
           max_w = max(max_w, w_sum)

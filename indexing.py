@@ -1464,7 +1464,7 @@ class FullIndex(Indexing):
           rec1_lower.append(rec_val.lower())
         rec1 = rec1_lower
 
-        for (rec_ident2, rec2) in small_data_set_dict.iteritems():
+        for (rec_ident2, rec2) in small_data_set_dict.items():
 
           w_vec = compare_funct(rec1, rec2)  # Compare them
 
@@ -3689,7 +3689,7 @@ class CanopyIndex(Indexing):
 
             # Loop over the q-grams and their counts in the given index value
             #
-            for (qgram, qgram_count) in qgram_dict.iteritems():
+            for (qgram, qgram_count) in qgram_dict.items():
 
               # Check if the q-gram IDF has not yet been calculated and cached
               #
@@ -4092,7 +4092,7 @@ class CanopyIndex(Indexing):
 
     # Loop over the q-grams and their counts in the given index value - - - - -
     #
-    for (qgram, qgram_count) in qgram_dict.iteritems():
+    for (qgram, qgram_count) in qgram_dict.items():
 
       # Make sure the q-gram is in the index as it might have been deleted in
       # the build process if it occured too frequent and the self.delete_perc
@@ -4121,7 +4121,7 @@ class CanopyIndex(Indexing):
         # (note that these counts have already been normalised during the build
         # process)
         #
-        for (rec_ident, rec_qgram_count) in qgram_rec_dict.iteritems():
+        for (rec_ident, rec_qgram_count) in qgram_rec_dict.items():
 
           # Calculate TF-IDF weight for this q-gram in given record (W_dt)
           #
@@ -4149,7 +4149,7 @@ class CanopyIndex(Indexing):
 
       # Loop over all record identifiers and their cosine similarities
       #
-      for (rec_ident, cos_sim) in cos_sim_dict.iteritems():
+      for (rec_ident, cos_sim) in cos_sim_dict.items():
 
         # Make sure the similarity is in the possible range
         #
@@ -4172,7 +4172,7 @@ class CanopyIndex(Indexing):
         max_cos_val =     -1
         max_cos_val_rec = ''
 
-        for (rec_ident, cos_sim) in cos_sim_dict.iteritems():
+        for (rec_ident, cos_sim) in cos_sim_dict.items():
           if (cos_sim > max_cos_val):
             max_cos_val =     cos_sim
             max_cos_val_rec = rec_ident
@@ -4190,7 +4190,7 @@ class CanopyIndex(Indexing):
 
       # Loop over all record identifiers and their cosine similarities
       #
-      for (rec_ident, cos_sim) in cos_sim_dict.iteritems():
+      for (rec_ident, cos_sim) in cos_sim_dict.items():
 
         # Due to numerical issues we round the final cosine similarities to 10
         # digits
@@ -4383,7 +4383,7 @@ class CanopyIndex(Indexing):
 
     # Calculate final thresholds and put into corresponding lists - - - - - - -
     #
-    for (rec_ident, rec_ident_count) in qgram_rec_count_dict.iteritems():
+    for (rec_ident, rec_ident_count) in qgram_rec_count_dict.items():
       rec_index_val_num_qgrams = index_val_num_qgram[rec_ident]
 
       # Calculate the Jaccard similarity:

@@ -884,7 +884,7 @@ class ComponentStandardiser:
 
     num_rec = 0  # Count total number of records
 
-    for (tag_state_str, seq_list) in self.hmm_seq_prob_dict.iteritems():
+    for (tag_state_str, seq_list) in self.hmm_seq_prob_dict.items():
       hmm_prob = self.hmm_seq_prob_dict[tag_state_str][0][1]
 
       sorted_seq_key_list.append((len(seq_list), hmm_prob, tag_state_str))

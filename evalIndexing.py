@@ -975,7 +975,7 @@ for ds_name in experiment_name_list:
     m =  0  # Number of matches
     nm = 0  # Number of non-matches
 
-    for (rec_id1, rec_id2_set) in index_method.rec_pair_dict.iteritems():
+    for (rec_id1, rec_id2_set) in index_method.rec_pair_dict.items():
 
       rec1 = index_method.rec_cache1[rec_id1]
 
@@ -1008,7 +1008,7 @@ for ds_name in experiment_name_list:
 
       tm = 0  # Total number of true matches (without indexing)
 
-      for (ent_id, ent_count) in ent_id_dict.iteritems():
+      for (ent_id, ent_count) in ent_id_dict.items():
         tm += ent_count*(ent_count-1)/2
 
     else:  # A linkage

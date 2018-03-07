@@ -419,7 +419,7 @@ class FellegiSunter(Classifier):
     num_false_nm = 0
     num_poss_m =   0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
       w_sum = sum(w_vec)
 
       if (w_sum > self.upper_threshold):
@@ -487,7 +487,7 @@ class FellegiSunter(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
       w_sum = sum(w_vec)
 
       if (w_sum > self.upper_threshold):
@@ -641,7 +641,7 @@ class OptimalThreshold(Classifier):
 
     # Go through all weight vectors and put them into match or non-match bins -
     #
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       for i in range(v_dim):
         match_dict =     match_weight_dict_list[i]
@@ -803,7 +803,7 @@ class OptimalThreshold(Classifier):
     num_true_nm =  0
     num_false_nm = 0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
       w_sum = sum(w_vec)
 
       diff_sum = 0.0  # Sum of differences over vector elements (dimensions)
@@ -1013,7 +1013,7 @@ class OptimalThreshold(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       w_sum = sum(w_vec)
 
@@ -1269,7 +1269,7 @@ class KMeans(Classifier):
       num_m =  0  # Number of weight vectors assigned to matches
       num_nm = 0  # Number of weight vectors assigned to non-matches
 
-      for (rec_id_tuple, w_vec) in use_w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in use_w_vec_dict.items():
 
         m_dist =  self.dist_measure(w_vec, m_centroid)
         nm_dist = self.dist_measure(w_vec, nm_centroid)
@@ -1374,7 +1374,7 @@ class KMeans(Classifier):
     num_true_nm =  0
     num_false_nm = 0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       m_dist =  self.dist_measure(w_vec, self.m_centroid)
       nm_dist = self.dist_measure(w_vec, self.nm_centroid)
@@ -1579,7 +1579,7 @@ class KMeans(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       m_dist =  self.dist_measure(w_vec, self.m_centroid)
       nm_dist = self.dist_measure(w_vec, self.nm_centroid)
@@ -1781,7 +1781,7 @@ class FarthestFirst(Classifier):
         max_dist =          -1.0
         max_dist_centroid = None
 
-        for (rec_id_tuple, w_vec) in use_w_vec_dict.iteritems():
+        for (rec_id_tuple, w_vec) in use_w_vec_dict.items():
           dist = self.dist_measure(centroid1, w_vec)
 
           if (dist > max_dist):
@@ -1908,7 +1908,7 @@ class FarthestFirst(Classifier):
     num_true_nm =  0
     num_false_nm = 0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       m_dist =  self.dist_measure(w_vec, self.m_centroid)
       nm_dist = self.dist_measure(w_vec, self.nm_centroid)
@@ -2111,7 +2111,7 @@ class FarthestFirst(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       m_dist =  self.dist_measure(w_vec, self.m_centroid)
       nm_dist = self.dist_measure(w_vec, self.nm_centroid)
@@ -2291,7 +2291,7 @@ class SuppVecMachine(Classifier):
     train_data =   []
     train_labels = []
 
-    for (rec_id_tuple, w_vec) in use_w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in use_w_vec_dict.items():
       train_data.append(w_vec)
       if (rec_id_tuple in match_set):
         train_labels.append(1.0)  # Match class
@@ -2373,7 +2373,7 @@ class SuppVecMachine(Classifier):
     num_true_nm =  0
     num_false_nm = 0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       if (svm_version == 'old'):
         if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -2584,7 +2584,7 @@ class SuppVecMachine(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       if (svm_version == 'old'):
         if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -2967,7 +2967,7 @@ class TwoStep(Classifier):
 
     # Main loop over all vectors in the weight vector dictionary - - - - - - -
     #
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       # Check if this weight vector is a good match example - - - - - - - - - -
       #
@@ -3116,7 +3116,7 @@ class TwoStep(Classifier):
         w_vec_nm_min_dist = 9999.99  # non-match training sets
         w_vec_nm_max_dist = -999.99
 
-        for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+        for (rec_id_tuple, w_vec) in w_vec_dict.items():
           w_vec_sum = sum(w_vec)
 
           if ((rec_id_tuple not in m_train_set) and \
@@ -3303,7 +3303,7 @@ class TwoStep(Classifier):
         #
         un_used_w_vec_dict = {}
 
-        for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+        for (rec_id_tuple, w_vec) in w_vec_dict.items():
           if ((rec_id_tuple not in m_train_set) and \
               (rec_id_tuple not in nm_train_set)):
             un_used_w_vec_dict[rec_id_tuple] = w_vec
@@ -3325,7 +3325,7 @@ class TwoStep(Classifier):
 
           # Classify so far un-used weight vectors
           #
-          for (rec_id_tuple, w_vec) in un_used_w_vec_dict.iteritems():
+          for (rec_id_tuple, w_vec) in un_used_w_vec_dict.items():
 
             if (self.svm_version == 'old'):
               c1 = self.svm_model.predict(w_vec)
@@ -3488,7 +3488,7 @@ class TwoStep(Classifier):
           num_m =  0  # Number of weight vectors assigned to matches
           num_nm = 0  # Number of weight vectors assigned to non-matches
 
-          for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+          for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
             m_dist =  dist_meas(w_vec, m_centroid)
             nm_dist = dist_meas(w_vec, nm_centroid)
@@ -3591,7 +3591,7 @@ class TwoStep(Classifier):
       # Step 1: For each (unique) non-training weight vector find its closest k
       # weight vectors from the training sets
       #
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         if ((rec_id_tuple not in m_train_set) and \
             (rec_id_tuple not in nm_train_set)):
@@ -3843,7 +3843,7 @@ class TwoStep(Classifier):
         logging.warn('SVM has not been trained, testing not possible')
         return [0,0,0,0]
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         if (self.svm_version == 'old'):
           if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -3879,7 +3879,7 @@ class TwoStep(Classifier):
 
       dist_meas = self.s2_classifier[1]
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         m_dist =  dist_meas(w_vec, self.m_centroid)
         nm_dist = dist_meas(w_vec, self.nm_centroid)
@@ -3908,7 +3908,7 @@ class TwoStep(Classifier):
       dist_meas = self.s2_classifier[1]
       k =         self.s2_classifier[2]
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         this_w_vec = tuple(w_vec)  # Tuple can be used as dictionary key
 
@@ -4030,7 +4030,7 @@ class TwoStep(Classifier):
         logging.warn('SVM has not been trained, classification not possible')
         return set(), set(), set()
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         if (self.svm_version == 'old'):
           if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -4055,7 +4055,7 @@ class TwoStep(Classifier):
 
       dist_meas = self.s2_classifier[1]
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         m_dist =  dist_meas(w_vec, self.m_centroid)
         nm_dist = dist_meas(w_vec, self.nm_centroid)
@@ -4078,7 +4078,7 @@ class TwoStep(Classifier):
       dist_meas = self.s2_classifier[1]
       k =         self.s2_classifier[2]
 
-      for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
         this_w_vec = tuple(w_vec)  # Tuple can be used as dictionary key
 
@@ -4346,7 +4346,7 @@ class TAILOR(Classifier):
       num_nm = 0  # Number of weight vectors assigned to non-matches
       num_pm = 0  # Number of weight vectors assigned to possible matches
 
-      for (rec_id_tuple, w_vec) in use_w_vec_dict.iteritems():
+      for (rec_id_tuple, w_vec) in use_w_vec_dict.items():
 
         m_dist =  self.dist_measure(w_vec, m_centroid)
         nm_dist = self.dist_measure(w_vec, nm_centroid)
@@ -4435,7 +4435,7 @@ class TAILOR(Classifier):
     train_data =   []
     train_labels = []
 
-    for (rec_id_tuple, w_vec) in use_w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in use_w_vec_dict.items():
       if (cluster_assign_dict[rec_id_tuple] == 'M'):
         train_data.append(w_vec)
         train_labels.append(1.0)  # Match class
@@ -4518,7 +4518,7 @@ class TAILOR(Classifier):
     num_true_nm =  0
     num_false_nm = 0
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       if (svm_version == 'old'):
         if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -4732,7 +4732,7 @@ class TAILOR(Classifier):
     non_match_set =  set()
     poss_match_set = set()
 
-    for (rec_id_tuple, w_vec) in w_vec_dict.iteritems():
+    for (rec_id_tuple, w_vec) in w_vec_dict.items():
 
       if (svm_version == 'old'):
         if (self.svm_model.predict(w_vec) == 1.0):  # Match prediction
@@ -4790,7 +4790,7 @@ def get_true_matches_nonmatches(weight_vec_dict, match_check_funct):
   true_match_set =     set()
   true_non_match_set = set()
 
-  for (rec_id_tuple, this_vec) in weight_vec_dict.iteritems():
+  for (rec_id_tuple, this_vec) in weight_vec_dict.items():
 
     if (match_check_funct(rec_id_tuple[0], rec_id_tuple[1], this_vec) == True):
       true_match_set.add(rec_id_tuple)
@@ -4872,7 +4872,7 @@ def extract_collapse_weight_vectors(manipulate_list, weight_vec_dict,
 
   out_vec_dict = {}
 
-  for (rec_id_tuple, this_vec) in weight_vec_dict.iteritems():
+  for (rec_id_tuple, this_vec) in weight_vec_dict.items():
     new_vec = []
     for coll_tuple in manipulate_list:
       w = 0.0
@@ -4974,13 +4974,13 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
     # Calculate the sum of the entropy for each sub-set of weight vectors
     # weighted by their probability of occuring
     #
-    for (val, val_count) in val_count_dict.iteritems():
+    for (val, val_count) in val_count_dict.items():
 
         val_prob = val_count / num_weight_vec
 
         weight_vec_subset_dict = {}
 
-        for (rec_id_tuple, this_w_vector) in weight_vec_dict.iteritems():
+        for (rec_id_tuple, this_w_vector) in weight_vec_dict.items():
 
           if (this_w_vector[split_column] == val):
             weight_vec_subset_dict[rec_id_tuple] = this_w_vector
@@ -5027,7 +5027,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
 
     new_weight_vec_dict = {}
 
-    for (rec_id_tuple, w_vector) in weight_vec_dict.iteritems():
+    for (rec_id_tuple, w_vector) in weight_vec_dict.items():
 
       if (w_vector[column] == val):
         new_weight_vec_dict[rec_id_tuple] = w_vector
@@ -5155,7 +5155,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
   match_set =     set()
   non_match_set = set()
 
-  for (rec_id_tuple, this_w_vector) in weight_vec_dict.iteritems():
+  for (rec_id_tuple, this_w_vector) in weight_vec_dict.items():
 
     decs_class = get_classification(this_w_vector, id3_tree)
 
