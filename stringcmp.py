@@ -418,8 +418,8 @@ def jaro(str1, str2, min_threshold = None):
   # Analyse the first string  - - - - - - - - - - - - - - - - - - - - - - - - -
   #
   for i in range(len1):
-    start = max(0,i-halflen)
-    end   = min(i+halflen+1,len2)
+    start = math.ceil(max(0,i-halflen))
+    end   = math.floor(min(i+halflen+1,len2))
     index = workstr2.find(str1[i],start,end)
     if (index > -1):  # Found common character
       common1 += 1
@@ -429,8 +429,8 @@ def jaro(str1, str2, min_threshold = None):
   # Analyse the second string - - - - - - - - - - - - - - - - - - - - - - - - -
   #
   for i in range(len2):
-    start = max(0,i-halflen)
-    end   = min(i+halflen+1,len1)
+    start = math.ceil(max(0,i-halflen))
+    end   = math.floor(min(i+halflen+1,len1))
     index = workstr1.find(str2[i],start,end)
     if (index > -1):  # Found common character
       common2 += 1
@@ -2370,8 +2370,8 @@ def twoleveljaro(str1, str2, comp_funct = 'equal', min_threshold = None):
 #      print i,   worklist1, asslist1
 #      print ' ', worklist2, asslist2
 
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len2)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len2))
 #      print start, end, list1[i], worklist2[start:end]
       if (list1[i] in work_list2[start:end]):  # Found common word
         ind = work_list2[start:end].index(list1[i])
@@ -2386,8 +2386,8 @@ def twoleveljaro(str1, str2, comp_funct = 'equal', min_threshold = None):
 #      print i,   worklist1, asslist1
 #      print ' ', worklist2, asslist2
 
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len1)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len1))
 #      print start, end, list2[i], worklist1[start:end]
       if (list2[i] in work_list1[start:end]):  # Found common word
         ind = work_list1[start:end].index(list2[i])
@@ -2417,8 +2417,8 @@ def twoleveljaro(str1, str2, comp_funct = 'equal', min_threshold = None):
     for i in range(len1):  # Analyse the first word list
 #      print i,   work_list1, ass_list1
 #      print ' ', work_list2, ass_list2
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len2)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len2))
 #      print start, end, list1[i], work_list2[start:end]
       search_word = list1[i]
       ind = -1  # The index of the best match found
@@ -2444,8 +2444,8 @@ def twoleveljaro(str1, str2, comp_funct = 'equal', min_threshold = None):
     for i in range(len2):  # Analyse the second string
 #      print i,   work_list1, ass_list1
 #      print ' ', work_list2, ass_list2
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len1)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len1))
 #      print start, end, list2[i], work_list1[start:end]
       search_word = list2[i]
       ind = -1  # The index of the best match found

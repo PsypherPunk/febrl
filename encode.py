@@ -192,12 +192,10 @@ def soundex(s, maxlen=4):
 
   # Translation table and characters that will not be used for soundex  - - - -
   #
-  transtable = string.maketrans('abcdefghijklmnopqrstuvwxyz', \
-                                '01230120022455012623010202')
-  # deletechars='aeiouhwy '
-  deletechars = ' '
-
-  s2 = string.translate(s[1:],transtable,deletechars)
+  transtable = str.maketrans('abcdefghijklmnopqrstuvwxyz', \
+                                '01230120022455012623010202',
+                             ' ')
+  s2 = s[1:].translate(transtable)
 
   s3 = s[0]  # Keep first character of original string
 
@@ -247,10 +245,9 @@ def mod_soundex(s, maxlen=4):
 
   # Translation table and characters that will not be used for soundex  - - - -
   #
-  transtable = string.maketrans('abcdefghijklmnopqrstuvwxyz', \
-                                '01360240043788015936020505')
-  deletechars='aeiouhwy '
-
+  transtable = str.maketrans('abcdefghijklmnopqrstuvwxyz', \
+                                '01360240043788015936020505',
+                             'aeiouhwy')
   if (not s):
     if (maxlen > 0):
       return maxlen*'0'  # Or 'z000' for compatibility with other
@@ -258,7 +255,7 @@ def mod_soundex(s, maxlen=4):
     else:
       return '0'
 
-  s2 = string.translate(s[1:],transtable, deletechars)
+  s2 = s[1:].translate(transtable)
 
   s3 = s[0]  # Keep first character of original string
 
@@ -465,13 +462,11 @@ def phonix(s, maxlen=4):
 
   # Translation table and characters that will not be used for Phonix
   #
-  transtable = string.maketrans('abcdefghijklmnopqrstuvwxyz', \
-                                '01230720022455012683070808')
+  transtable = str.maketrans('abcdefghijklmnopqrstuvwxyz', \
+                                '01230720022455012683070808',
+                             ' ')
 
-  # deletechars='aeiouhwy '
-  deletechars = ' '
-
-  s2 = string.translate(phonixstr[1:],transtable,deletechars)
+  s2 = phonixstr[1:].translate(transtable)
 
   # If first character is a vowel or 'y' replace it with 'V' otherwise keep it
   # (assume all other characters are lowercase)
@@ -756,8 +751,8 @@ def nysiis(s, maxlen=4):
 
   # Replace all vowels with A and delete whitespaces
   #
-  voweltable = string.maketrans('eiou', 'aaaa')
-  s2 = string.translate(s,voweltable, ' ')
+  voweltable = str.maketrans('eiou', 'aaaa', ' ')
+  s2 = s.translate(voweltable)
 
   if (not s2):  # String only contained whitespaces
     return ''
@@ -877,7 +872,7 @@ def dmetaphone(s, maxlen=4):
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   length = len(s)
-  if (len < 1):
+  if (length < 1):
     return ''
   last = length-1
 
@@ -1710,8 +1705,9 @@ def fuzzy_soundex(s, maxlen=4):
 
   # Translation table and characters that will not be used for soundex  - - - -
   #
-  transtable = string.maketrans('abcdefghijklmnopqrstuvwxyz', \
-                                '01930170077455017693010709')
+  transtable = str.maketrans('abcdefghijklmnopqrstuvwxyz', \
+                                '01930170077455017693010709',
+                             ' ')
   # Soundex:                    '01230120022455012623010202')
   # Differences:                   *   *  **     * *    * *
 
@@ -1790,7 +1786,7 @@ def fuzzy_soundex(s, maxlen=4):
 
   s2 = ''.join(qgram_list)
 
-  s3 = string.translate(s2[1:],transtable, ' ')  # Delete spaces
+  s3 = s2[1:].translate(transtable)  # Delete spaces
 
   s4 = s2[0]
 

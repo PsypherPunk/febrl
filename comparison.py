@@ -2399,8 +2399,8 @@ class FieldComparatorJaro(FieldComparatorApproxString):
     common1, common2 = 0.0, 0.0  # Number of common characters
 
     for i in range(len1):  # Analyse the first string
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len2)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len2))
       index = workstr2.find(val1[i],start,end)
       if (index > -1):  # Found common character
         common1 += 1
@@ -2408,8 +2408,8 @@ class FieldComparatorJaro(FieldComparatorApproxString):
         workstr2 = workstr2[:index]+self.JARO_MARKER_CHAR+workstr2[index+1:]
 
     for i in range(len2):  # Analyse the second string
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len1)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len1))
       index = workstr1.find(val2[i],start,end)
       if (index > -1):  # Found common character
         common2 += 1
@@ -2577,8 +2577,8 @@ class FieldComparatorWinkler(FieldComparatorApproxString):
     # Analyse the first string  - - - - - - - - - - - - - - - - - - - - - - - -
     #
     for i in range(len1):
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len2)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len2))
       index = workstr2.find(val1[i],start,end)
       if (index > -1):  # Found common character
         common1 += 1
@@ -2588,8 +2588,8 @@ class FieldComparatorWinkler(FieldComparatorApproxString):
     # Analyse the second string - - - - - - - - - - - - - - - - - - - - - - - -
     #
     for i in range(len2):
-      start = max(0,i-halflen)
-      end   = min(i+halflen+1,len1)
+      start = math.ceil(max(0,i-halflen))
+      end   = math.floor(min(i+halflen+1,len1))
       index = workstr1.find(val2[i],start,end)
       if (index > -1):  # Found common character
         common2 += 1
@@ -4748,6 +4748,8 @@ class FieldComparatorCompress(FieldComparatorApproxString):
 
     # Calculate the compressor similarity value - - - - - - - - - - - - - - - -
     #
+    val1 = val1.encode("utf-8")
+    val2 = val2.encode("utf-8")
     if (self.compressor == 'zlib'):
       c1 =  float(len(zlib.compress(val1)))
       c2 =  float(len(zlib.compress(val2)))
@@ -5144,8 +5146,8 @@ class FieldComparatorTwoLevelJaro(FieldComparatorApproxString):
     if (self.comp_funct == 'equal'):
 
       for i in range(len1):  # Analyse the first word list
-        start = max(0,i-halflen)
-        end   = min(i+halflen+1,len2)
+        start = math.ceil(max(0,i-halflen))
+        end   = math.floor(min(i+halflen+1,len2))
         if (list1[i] in work_list2[start:end]):  # Found common word
           ind = work_list2[start:end].index(list1[i])
           common1 += 1
@@ -5153,8 +5155,8 @@ class FieldComparatorTwoLevelJaro(FieldComparatorApproxString):
           work_list2[ind+start] = self.JARO_MARKER_CHAR
 
       for i in range(len2):  # Analyse the second string
-        start = max(0,i-halflen)
-        end   = min(i+halflen+1,len1)
+        start = math.ceil(max(0,i-halflen))
+        end   = math.floor(min(i+halflen+1,len1))
         if (list2[i] in work_list1[start:end]):  # Found common word
           ind = work_list1[start:end].index(list2[i])
           common2 += 1
@@ -5174,8 +5176,8 @@ class FieldComparatorTwoLevelJaro(FieldComparatorApproxString):
     else:
 
       for i in range(len1):  # Analyse the first word list
-        start = max(0,i-halflen)
-        end   = min(i+halflen+1,len2)
+        start = math.ceil(max(0,i-halflen))
+        end   = math.floor(min(i+halflen+1,len2))
         search_word = list1[i]
         ind = -1  # The index of the best match found
         best_match_sim = -1
@@ -5193,8 +5195,8 @@ class FieldComparatorTwoLevelJaro(FieldComparatorApproxString):
           work_list2[ind+start] = self.JARO_MARKER_CHAR
 
       for i in range(len2):  # Analyse the second string
-        start = max(0,i-halflen)
-        end   = min(i+halflen+1,len1)
+        start = math.ceil(max(0,i-halflen))
+        end   = math.floor(min(i+halflen+1,len1))
         search_word = list2[i]
         ind = -1  # The index of the best match found
         best_match_sim = -1
