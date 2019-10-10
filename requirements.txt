@@ -1,4 +1,6 @@
 matplotlib
 #pygtk — needs installing at system level, python-gtk2, python-gtk2-dev
 #gtk
-svm
+#svm
+scikit-learn
+scipy

@@ -999,7 +999,7 @@ for ds_name in experiment_name_list:
       ent_id_dict = {}  # Dictionary with all unique entity identifers and
                         # counts of how often they appear
 
-      for ent_rec in index_method.rec_cache1.itervalues():
+      for ent_rec in index_method.rec_cache1.values():
         ent_id = get_id_funct(ent_rec)
         ent_id_count = ent_id_dict.get(ent_id, 0) + 1
         ent_id_dict[ent_id] = ent_id_count
@@ -1016,12 +1016,12 @@ for ds_name in experiment_name_list:
       ent_id_dict1 = {}  # Dictionaries with all unique entity identifers and
       ent_id_dict2 = {}  # counts of how often they appear
 
-      for ent_rec in index_method.rec_cache1.itervalues():
+      for ent_rec in index_method.rec_cache1.values():
         ent_id = get_id_funct(ent_rec)
         ent_id_count = ent_id_dict1.get(ent_id, 0) + 1
         ent_id_dict1[ent_id] = ent_id_count
 
-      for ent_rec in index_method.rec_cache2.itervalues():
+      for ent_rec in index_method.rec_cache2.values():
         ent_id = get_id_funct(ent_rec)
         ent_id_count = ent_id_dict2.get(ent_id, 0) + 1
         ent_id_dict2[ent_id] = ent_id_count

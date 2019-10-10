@@ -130,7 +130,7 @@ import random
 #  imp_pyml = False
 
 try:
-  import svm
+  from sklearn import svm
   imp_svm = True
 except:
   imp_svm = False
@@ -888,8 +888,8 @@ class OptimalThreshold(Classifier):
 
     # Create the sub-sets of record identifier pairs for folds - - - - - - - -
     #
-    rec_id_tuple_list = w_vec_dict.keys()
-    random.shuffle(rec_id_tuple_list)
+    rec_id_tuple_list = list(w_vec_dict.keys())
+    random.shuffle(list(rec_id_tuple_list))
     fold_num_rec_id_tuple = max(1,int(round(float(len(rec_id_tuple_list))/n)))
 
     # Split the weight vector dictionary and match and non-match sets into
@@ -1199,7 +1199,7 @@ class KMeans(Classifier):
 
       use_w_vec_dict = {}  # Create a new weight vector dictionary with samples
 
-      rec_id_tuple_sample = random.sample(w_vec_dict.keys(),num_w_vec_sample)
+      rec_id_tuple_sample = random.sample(list(w_vec_dict.keys()),num_w_vec_sample)
       assert len(rec_id_tuple_sample) == num_w_vec_sample
 
       for rec_id_tuple in rec_id_tuple_sample:
@@ -1213,7 +1213,7 @@ class KMeans(Classifier):
     # Initialise the cluster centroid - - - - - - - - - - - - - - - - - - - - -
     #
     if (self.centroid_init == 'random'):
-      rec_id_tuple_list = use_w_vec_dict.keys()
+      rec_id_tuple_list = list(use_w_vec_dict.keys())
 
       m_centroid_rec_id = random.choice(rec_id_tuple_list)
       rec_id_tuple_list.remove(m_centroid_rec_id)
@@ -1238,7 +1238,7 @@ class KMeans(Classifier):
       m_centroid =  [-999.99]*v_dim
       nm_centroid = [999.99]*v_dim
 
-      for w_vec in use_w_vec_dict.itervalues():
+      for w_vec in use_w_vec_dict.values():
         for i in range(v_dim):
           m_centroid[i] =  max(w_vec[i], m_centroid[i])
           nm_centroid[i] = min(w_vec[i], nm_centroid[i])
@@ -1302,7 +1302,7 @@ class KMeans(Classifier):
         raise Exception
 
       if (num_m == 0) or (num_nm == 0):
-        logging.warn('One cluster is empty: matches=%d, non-matches=%d' % \
+        logging.warning('One cluster is empty: matches=%d, non-matches=%d' % \
                      (num_m, num_nm))
         break  # Stop K-means iterations
 
@@ -1450,7 +1450,7 @@ class KMeans(Classifier):
 
     # Create the sub-sets of record identifier pairs for folds - - - - - - - -
     #
-    rec_id_tuple_list = w_vec_dict.keys()
+    rec_id_tuple_list = list(w_vec_dict.keys())
     random.shuffle(rec_id_tuple_list)
     fold_num_rec_id_tuple = max(1,int(round(float(len(rec_id_tuple_list))/n)))
 
@@ -1755,7 +1755,7 @@ class FarthestFirst(Classifier):
 
       use_w_vec_dict = {}  # Create a new weight vector dictionary with samples
 
-      rec_id_tuple_sample = random.sample(w_vec_dict.keys(),num_w_vec_sample)
+      rec_id_tuple_sample = random.sample(list(w_vec_dict.keys()),num_w_vec_sample)
       assert len(rec_id_tuple_sample) == num_w_vec_sample
 
       for rec_id_tuple in rec_id_tuple_sample:
@@ -1811,7 +1811,7 @@ class FarthestFirst(Classifier):
       # Assume a larger summed weight is a match, a lower summed weight a
       # non-match
       #
-      for w_vec in use_w_vec_dict.itervalues():
+      for w_vec in use_w_vec_dict.values():
         w_vec_sum = sum(w_vec)
 
         if (w_vec_sum > m_centroid_sum):
@@ -1831,7 +1831,7 @@ class FarthestFirst(Classifier):
       for i in range(v_dim):  # One dictionary per dimension
         nm_histograms.append({})
 
-      for w_vec in use_w_vec_dict.itervalues():
+      for w_vec in use_w_vec_dict.values():
         w_vec_sum = sum(w_vec)
 
         if (w_vec_sum > m_centroid_sum):  # Get match weight vector
@@ -1849,7 +1849,7 @@ class FarthestFirst(Classifier):
 
       for i in range(v_dim):
         max_count = -1
-        for (binned_w, count) in nm_histograms[i].iteritems():
+        for (binned_w, count) in nm_histograms[i].items():
           if (count > max_count):
            centroid_w = binned_w
            max_count = count
@@ -1984,7 +1984,7 @@ class FarthestFirst(Classifier):
 
     # Create the sub-sets of record identifier pairs for folds - - - - - - - -
     #
-    rec_id_tuple_list = w_vec_dict.keys()
+    rec_id_tuple_list = list(w_vec_dict.keys())
     random.shuffle(rec_id_tuple_list)
     fold_num_rec_id_tuple = max(1,int(round(float(len(rec_id_tuple_list))/n)))
 
@@ -2187,7 +2187,7 @@ class SuppVecMachine(Classifier):
                         'SuppVectorMach classifier')
       raise Exception
 
-    self.svm_type =    svm.C_SVC
+    self.svm_type =    svm.SVC
     self.kernel_type = 'LINEAR'
     self.C =           10
     self.svm_model =   None  # Will be set in train() method
@@ -2279,7 +2279,7 @@ class SuppVecMachine(Classifier):
 
       use_w_vec_dict = {}  # Create a new weight vector dictionary with samples
 
-      rec_id_tuple_sample = random.sample(w_vec_dict.keys(),num_w_vec_sample)
+      rec_id_tuple_sample = random.sample(list(w_vec_dict.keys()),num_w_vec_sample)
       assert len(rec_id_tuple_sample) == num_w_vec_sample
 
       for rec_id_tuple in rec_id_tuple_sample:
@@ -2302,15 +2302,14 @@ class SuppVecMachine(Classifier):
     assert len(train_data) == len(use_w_vec_dict)
 
     # Initialise and train the SVM - - - - - - - - - - - - - - - - - - - - - -
-    #
     if (self.kernel_type == 'LINEAR'):
-      svm_kernel = svm.LINEAR
+      svm_kernel = self.kernel_type.lower()
     elif (self.kernel_type == 'POLY'):
-      svm_kernel = svm.POLY
+      svm_kernel = self.kernel_type.lower()
     elif (self.kernel_type == 'RBF'):
-      svm_kernel = svm.RBF
+      svm_kernel = self.kernel_type.lower()
     elif (self.kernel_type == 'SIGMOID'):
-      svm_kernel = svm.SIGMOID
+      svm_kernel = self.kernel_type.lower()
 
     svm_prob =  svm.svm_problem(train_labels, train_data)
 
@@ -2318,14 +2317,14 @@ class SuppVecMachine(Classifier):
     # possible error
     #
     try:
-      svm_param = svm.svm_parameter(svm_type = svm.C_SVC, C=self.C,
+      svm_param = svm.svm_parameter(svm_type = svm.SVC, C=self.C,
                                     kernel_type=svm_kernel)
       self.svm_model = svm.svm_model(svm_prob, svm_param)
       self.svm_version = 'old'
 
     except:
       svm_param = svm.svm_parameter('-s %d -c %f -t %d' % \
-                  (svm.C_SVC, self.C, svm_kernel))
+                  (svm.SVC, self.C, svm_kernel))
       self.svm_model = svm.libsvm.svm_train(svm_prob, svm_param)
       self.svm_version = 'new'
 
@@ -2455,7 +2454,7 @@ class SuppVecMachine(Classifier):
 
     # Create the sub-sets of record identifier pairs for folds - - - - - - - -
     #
-    rec_id_tuple_list = w_vec_dict.keys()
+    rec_id_tuple_list = list(w_vec_dict.keys())
     random.shuffle(rec_id_tuple_list)
     fold_num_rec_id_tuple = max(1,int(round(float(len(rec_id_tuple_list))/n)))
 
@@ -3132,7 +3131,7 @@ class TwoStep(Classifier):
             w_vec_nm_min_dist = min(w_vec_nm_min_dist, w_vec_sum)
             w_vec_nm_max_dist = max(w_vec_nm_max_dist, w_vec_sum)
 
-        w_vec_dist_list = w_vec_dist_dict.keys()
+        w_vec_dist_list = list(w_vec_dist_dict.keys())
         w_vec_dist_list.sort()  # Sort according to distance from 0.0
 
         logging.info('  Minimum and maximum distance from 0.0:           ' + \
@@ -3246,15 +3245,15 @@ class TwoStep(Classifier):
 
     if (self.s2_classifier[0] == 'svm'):  # - - - - - - - - - - - - - - - - - -
 
-      svm_type =   svm.C_SVC
+      svm_type =   svm.SVC
       if (self.s2_classifier[1] == 'LINEAR'):
-        svm_kernel = svm.LINEAR
+        svm_kernel = self.s2_classifier[1].lower()
       elif (self.s2_classifier[1] == 'POLY'):
-        svm_kernel = svm.POLY
+        svm_kernel = self.s2_classifier[1].lower()
       elif (self.s2_classifier[1] == 'RBF'):
-        svm_kernel = svm.RBF
+        svm_kernel = self.s2_classifier[1].lower()
       elif (self.s2_classifier[1] == 'SIGMOID'):
-        svm_kernel = svm.SIGMOID
+        svm_kernel = self.s2_classifier[1].lower()
       C =          self.s2_classifier[2]
       increment =  self.s2_classifier[3]
       train_perc = self.s2_classifier[4]
@@ -3277,7 +3276,7 @@ class TwoStep(Classifier):
       # possible error
       #
       try:
-        svm_param = svm.svm_parameter(svm_type = svm.C_SVC, C=C,
+        svm_param = svm.svm_parameter(svm_type = svm.SVC, C=C,
                                       kernel_type=svm_kernel)
         self.svm_model = svm.svm_model(svm_prob, svm_param)
         self.svm_version = 'old'
@@ -4189,7 +4188,7 @@ class TAILOR(Classifier):
     self.max_iter_count = None
     self.dist_measure =   None
     self.sample =         100.0
-    self.svm_type =       svm.C_SVC
+    self.svm_type =       svm.SVC
     self.kernel_type =    'LINEAR'
     self.C =              10
     self.svm_model =      None  # Will be set in train() method
@@ -4290,7 +4289,7 @@ class TAILOR(Classifier):
 
       use_w_vec_dict = {}  # Create a new weight vector dictionary with samples
 
-      rec_id_tuple_sample = random.sample(w_vec_dict.keys(),num_w_vec_sample)
+      rec_id_tuple_sample = random.sample(list(w_vec_dict.keys()),num_w_vec_sample)
       assert len(rec_id_tuple_sample) == num_w_vec_sample
 
       for rec_id_tuple in rec_id_tuple_sample:
@@ -4304,7 +4303,7 @@ class TAILOR(Classifier):
     m_centroid =  [-999.99]*v_dim  # Get the minimum and maximum values in
     nm_centroid = [999.99]*v_dim   # each weight vector element
 
-    for w_vec in use_w_vec_dict.itervalues():
+    for w_vec in use_w_vec_dict.values():
       for i in range(v_dim):
         m_centroid[i] =  max(w_vec[i], m_centroid[i])
         nm_centroid[i] = min(w_vec[i], nm_centroid[i])
@@ -4463,14 +4462,14 @@ class TAILOR(Classifier):
     # possible error
     #
     try:
-      svm_param = svm.svm_parameter(svm_type = svm.C_SVC, C=self.C,
+      svm_param = svm.svm_parameter(svm_type = svm.SVC, C=self.C,
                                     kernel_type=svm_kernel)
       self.svm_model = svm.svm_model(svm_prob, svm_param)
       self.svm_version = 'old'
 
     except:
       svm_param = svm.svm_parameter('-s %d -c %f -t %d' % \
-                  (svm.C_SVC, self.C, svm_kernel))
+                  (svm.SVC, self.C, svm_kernel))
       self.svm_model = svm.libsvm.svm_train(svm_prob, svm_param)
       self.svm_version = 'new'
 
@@ -4603,7 +4602,7 @@ class TAILOR(Classifier):
 
     # Create the sub-sets of record identifier pairs for folds - - - - - - - -
     #
-    rec_id_tuple_list = w_vec_dict.keys()
+    rec_id_tuple_list = list(w_vec_dict.keys())
     random.shuffle(rec_id_tuple_list)
     fold_num_rec_id_tuple = max(1,int(round(float(len(rec_id_tuple_list))/n)))
 
@@ -4961,7 +4960,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
 
     # Calculate the frequency of each value in the selected split cloumn
     #
-    for this_w_vector in weight_vec_dict.itervalues():
+    for this_w_vector in weight_vec_dict.values():
       val = this_w_vector[split_column]
 
       val_count = val_count_dict.get(val, 0) + 1.0
@@ -5082,7 +5081,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
     #
     best_column_val_list = []
 
-    for w_vector in weight_vec_dict.itervalues():
+    for w_vector in weight_vec_dict.values():
       if (w_vector[best_column] not in best_column_val_list):
         best_column_val_list.append(w_vector[best_column])
 
@@ -5127,7 +5126,7 @@ def DecisionTree(weight_vec_dict, match_set, non_match_set):
 
     else:  # Traverse the tree further until a leaf node is found.
 
-      column = tree.keys()[0]
+      column = list(tree.keys())[0]
       t = tree[column][w_vector[column]]
 
       return get_classification(w_vector, t)

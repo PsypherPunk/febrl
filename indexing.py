@@ -1711,7 +1711,7 @@ class BlockingIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted blocking index in %s' % \
@@ -2040,7 +2040,7 @@ class SortingIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted sorting index in %s' % \
@@ -2390,7 +2390,7 @@ class SortingArrayIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted sorting index in %s' % \
@@ -2865,7 +2865,7 @@ class AdaptSortingIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted sorting index in %s' % \
@@ -3261,7 +3261,7 @@ class QGramIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted %d-gram index in %s' % \
@@ -4021,7 +4021,7 @@ class CanopyIndex(Indexing):
 
     num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in rec_pair_dict.itervalues():
+    for rec_ident2_set in rec_pair_dict.values():
       num_rec_pairs += len(rec_ident2_set)
 
     self.rec_pair_dict = rec_pair_dict  # Save for later used in run()
@@ -5329,7 +5329,7 @@ class StringMapIndex(Indexing):
 
     num_rec_pairs = 0  # Count lengths of all record identifier sets - - - - -
 
-    for rec_ident2_set in rec_pair_dict.itervalues():
+    for rec_ident2_set in rec_pair_dict.values():
       num_rec_pairs += len(rec_ident2_set)
 
     self.rec_pair_dict = rec_pair_dict  # Save for later used in run()
@@ -5866,7 +5866,7 @@ class SuffixArrayIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted suffix array index in %s' % \
@@ -6474,7 +6474,7 @@ class RobustSuffixArrayIndex(Indexing):
 
     self.num_rec_pairs = 0  # Count lengths of all record identifier sets - - -
 
-    for rec_ident2_set in self.rec_pair_dict.itervalues():
+    for rec_ident2_set in self.rec_pair_dict.values():
       self.num_rec_pairs += len(rec_ident2_set)
 
     logging.info('Compacted suffix array index in %s' % \

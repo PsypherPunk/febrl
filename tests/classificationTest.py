@@ -1579,8 +1579,8 @@ class TestCase(unittest.TestCase):
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
 
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
@@ -1595,8 +1595,8 @@ class TestCase(unittest.TestCase):
                                                                     vec_w_list)
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
@@ -1612,8 +1612,8 @@ class TestCase(unittest.TestCase):
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
 
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
@@ -1631,8 +1631,8 @@ class TestCase(unittest.TestCase):
                                                                     vec_w_list)
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
@@ -1650,8 +1650,8 @@ class TestCase(unittest.TestCase):
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
 
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
@@ -1668,8 +1668,8 @@ class TestCase(unittest.TestCase):
                                                                     vec_w_list)
     assert isinstance(res_w_vec_dict, dict) == True
     assert len(res_w_vec_dict) == len(w_vec_dict)
-    org_keys = w_vec_dict.keys()
-    new_keys = res_w_vec_dict.keys()
+    org_keys = list(w_vec_dict.keys())
+    new_keys = list(res_w_vec_dict.keys())
     org_keys.sort()
     new_keys.sort()
     assert org_keys == new_keys
